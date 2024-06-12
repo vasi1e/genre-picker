@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>$u$$y Music Fest</title>
+    <meta charset="utf-8">
+	<style>
+      body {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(130deg, #fff947, #f26e08); /* Example gradient */
+        margin: 0; /* Remove default margin */
+      }
+
+      /* Center the form */
+      form {
+        background: #0000005c; /* Optional: semi-transparent background for the form */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+	  input[type="submit"] {
+        padding: 5px 10px;
+        border: none;
+        background-color: #f3ca5b; /* Background color */
+        color: white; /* Text color */
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 25px;
+        transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+      }
+
+      /* Hover effect for submit button */
+      input[type="submit"]:hover {
+        background-color: #f0bd30; /* Darker background color on hover */
+      }
+
+	  span {
+		color: white;
+        font-size: 25px; /* Increase font size */
+      }
+
+	  select {
+        /* Reset */
+        appearance: none;
+        border: 0;
+        outline: 0;
+        font: inherit;
+        /* Personalize */
+        padding: 5px 70px 5px 10px;
+        background: url(https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg) no-repeat right 10px center / 30px,
+          linear-gradient(to left, rgba(255, 255, 255, 0.3) 50px, rgba(255, 255, 255, 0.2) 50px);
+        border-radius: 0.25em;
+        box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+		font-size: 25px;
+		color: white;
+      }
+
+	  option {
+        color: white;
+        background-color: rgb(246 151 27 / 83%);
+      }
+	</style>
+  </head>
+  <body>
+	<form action="/pick" method="post">
+	  <span>Hi, </span>
+	    <select name="name" required>
+	  	  <option value="" disabled hidden {{ if eq .selected "" }}selected{{ end }}>Who are you?</option>
+	    {{ range .people }}
+	    <option value="{{ . }}" {{ if eq . $.selected }}selected{{ end }}>{{ . }}</option>
+	    {{ end }}
+	    </select>
+	  <span> your partner is {{ .with }} in genre {{ .genre }}</span>
+	  <input type="submit" value="Check">
+	</form>
+  </body>
+</html>
+
